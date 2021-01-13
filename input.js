@@ -1,4 +1,5 @@
 const { stdin } = require("process");
+const {MOVE_UP_KEY, MOVE_DOWN_KEY, MOVE_RIGHT_KEY, MOVE_LEFT_KEY, MESSAGES} = require('./constants')
 
 let connection;
 
@@ -17,20 +18,17 @@ const setupInput = function(conn) {
 
 const handleUserInput = (data) => {
   console.log(data)
-  if(data === 'w'){
+  if(data === MOVE_UP_KEY){
     connection.write('Move: up')
-  }else if(data === 'a'){
+  }else if(data === MOVE_LEFT_KEY){
     connection.write('Move: left')
-  }else if(data === 's'){
+  }else if(data === MOVE_DOWN_KEY){
     connection.write('Move: down')
   }
-  else if(data === 'd'){
+  else if(data === MOVE_RIGHT_KEY){
     connection.write('Move: right')
-  }
-  else{
-    stdin.setRawMode(false);
-    connection.write(`Say: ${data}`)
-    stdin.setRawMode(true);
+  }else{
+    connection.write(`Say: ${MESSAGES[data]}`)
   }
 
   if(data === '\u0003'){
