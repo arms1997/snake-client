@@ -1,10 +1,12 @@
+const { stdin } = require("process");
+
 let connection;
 
 const setupInput = function(conn) {
   connection = conn;
   const stdin = process.stdin;
 
-  stdin.setRawMode(true);
+  stdin.setRawMode(true)
   stdin.setEncoding('utf-8');
   stdin.resume();
 
@@ -15,18 +17,20 @@ const setupInput = function(conn) {
 
 const handleUserInput = (data) => {
   console.log(data)
-
   if(data === 'w'){
     connection.write('Move: up')
-  }
-  if(data === 'a'){
+  }else if(data === 'a'){
     connection.write('Move: left')
-  }
-  if(data === 's'){
+  }else if(data === 's'){
     connection.write('Move: down')
   }
-  if(data === 'd'){
+  else if(data === 'd'){
     connection.write('Move: right')
+  }
+  else{
+    stdin.setRawMode(false);
+    connection.write(`Say: ${data}`)
+    stdin.setRawMode(true);
   }
 
   if(data === '\u0003'){
