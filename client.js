@@ -8,6 +8,11 @@ const connect = function(){
 
   conn.setEncoding('utf-8');
 
+  conn.on('connect', () => {
+    console.log('connection succesfully established')
+    conn.write("Name: ARM")
+  })
+
   conn.on('data', (data) => {
     console.log(data)
   })
